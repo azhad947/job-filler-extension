@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Job Application Autofill</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">✎</span>
+      <span class="brand-name">Autofill</span>
+    </div>
+    <button id="fillBtn" class="fill-btn">Fill this page</button>
+  </header>
+
+  <div id="status" class="status" hidden></div>
+
+  <form id="profileForm">
+
+    <details open class="section">
+      <summary>Basic info</summary>
+      <div class="grid2">
+        <label>First name<input type="text" id="firstName" autocomplete="off"></label>
+        <label>Last name<input type="text" id="lastName" autocomplete="off"></label>
+      </div>
+      <label>Full name (used if a form only has one "name" field)<input type="text" id="fullName" autocomplete="off"></label>
+      <div class="grid2">
+        <label>Email<input type="email" id="email" autocomplete="off"></label>
+        <label>Phone<input type="tel" id="phone" autocomplete="off"></label>
+      </div>
+    </details>
+
+    <details class="section">
+      <summary>Address</summary>
+      <label>Street address<input type="text" id="addressLine" autocomplete="off"></label>
+      <div class="grid2">
+        <label>City<input type="text" id="city" autocomplete="off"></label>
+        <label>State / Province<input type="text" id="state" autocomplete="off"></label>
+      </div>
+      <div class="grid2">
+        <label>ZIP / Postal code<input type="text" id="zip" autocomplete="off"></label>
+        <label>Country<input type="text" id="country" autocomplete="off"></label>
+      </div>
+    </details>
+
+    <details class="section">
+      <summary>Links</summary>
+      <label>LinkedIn URL<input type="url" id="linkedin" autocomplete="off"></label>
+      <label>GitHub URL<input type="url" id="github" autocomplete="off"></label>
+      <label>Portfolio / website<input type="url" id="portfolio" autocomplete="off"></label>
+    </details>
+
+    <details class="section">
+      <summary>Work background</summary>
+      <div class="grid2">
+        <label>Current title<input type="text" id="currentTitle" autocomplete="off"></label>
+        <label>Current company<input type="text" id="currentCompany" autocomplete="off"></label>
+      </div>
+      <label>Years of experience<input type="text" id="yearsExperience" autocomplete="off"></label>
+      <div class="grid2">
+        <label>Current CTC<input type="text" id="currentCTC" autocomplete="off" placeholder="e.g. 12 LPA"></label>
+        <label>Expected CTC<input type="text" id="expectedCTC" autocomplete="off" placeholder="e.g. 18 LPA"></label>
+      </div>
+    </details>
+
+    <details class="section">
+      <summary>Education</summary>
+      <div class="grid2">
+        <label>Degree<input type="text" id="degree" autocomplete="off"></label>
+        <label>School / university<input type="text" id="school" autocomplete="off"></label>
+      </div>
+      <label>Graduation year<input type="text" id="gradYear" autocomplete="off"></label>
+    </details>
+
+    <details class="section">
+      <summary>Professional summary</summary>
+      <label>Intro (for "Introduce yourself" / "Tell us about yourself" fields)<textarea id="intro" rows="3" placeholder="e.g. Hi, I'm Azhad, a frontend engineer with..."></textarea></label>
+      <p class="hint">Used as context for open-ended questions (e.g. "Why do you want to work here?") when AI fill is on.</p>
+      <label>Short summary / bio<textarea id="summary" rows="3" placeholder="e.g. Frontend engineer with 3 years building React/TypeScript products, focused on..."></textarea></label>
+    </details>
+
+    <details class="section">
+      <summary>AI fill (optional, uses Gemini)</summary>
+      <p class="hint">When on, any field the simple matcher can't confidently label — visa sponsorship, salary expectations, "how did you hear about us", etc. — gets sent to Gemini along with your profile above, so it can pick the best answer. Your API key is stored only in this browser and calls go straight from your browser to Google.</p>
+      <label class="checkbox-row"><input type="checkbox" id="aiEnabled"> Use AI for fields the matcher can't handle</label>
+      <label>Gemini API key<input type="password" id="geminiApiKey" autocomplete="off" placeholder="AIza..."></label>
+      <label>Model<input type="text" id="geminiModel" autocomplete="off" placeholder="gemini-2.0-flash"></label>
+      <p class="hint">Get a free key at <span class="mono">aistudio.google.com/apikey</span>. Leave model blank to use the default.</p>
+    </details>
+
+    <details class="section">
+      <summary>Voluntary demographic answers</summary>
+      <p class="hint">Some forms include optional self-identification questions. Leave blank to skip them. Stored only in your browser, never sent anywhere.</p>
+      <div class="grid2">
+        <label>Gender<input type="text" id="gender" autocomplete="off" placeholder="e.g. Male, Female, Prefer not to say"></label>
+        <label>Veteran status<input type="text" id="veteranStatus" autocomplete="off" placeholder="e.g. Not a veteran"></label>
+      </div>
+      <div class="grid2">
+        <label>Race / ethnicity<input type="text" id="race" autocomplete="off"></label>
+        <label>Disability status<input type="text" id="disabilityStatus" autocomplete="off"></label>
+      </div>
+    </details>
+
+    <button type="submit" id="saveBtn" class="save-btn">Save profile</button>
+  </form>
+
+  <footer class="foot">
+    <span id="lastSaved"></span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
